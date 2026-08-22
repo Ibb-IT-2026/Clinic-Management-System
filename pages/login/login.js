@@ -5,7 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     // If already logged in, redirect straight to dashboard
-    AuthGuard.redirectIfAuth('pages/dashboard/dashboard.html');
+    //AuthGuard.redirectIfAuth('pages/dashboard/dashboard.html');
 
     const form = document.getElementById('login-form');
     const usernameInput = document.getElementById('username');
