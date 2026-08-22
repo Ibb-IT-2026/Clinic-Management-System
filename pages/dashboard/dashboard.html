@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="لوحة التحكم والإحصائيات - عيادة الأسنان">
+    <title>لوحة التحكم - نظام إدارة عيادة الأسنان</title>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="../../shared/css/variables.css">
+    <link rel="stylesheet" href="../../shared/css/global.css">
+    <link rel="stylesheet" href="../../shared/css/responsive.css">
+
+    <!-- Page-Specific Style -->
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+    <!-- Header Component -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="dashboard.html" class="brand-logo">
+                <i class="fas fa-tooth"></i>
+                <span>عيادة د. علي محمد لطب الأسنان</span>
+            </a>
+
+            <div class="header-actions">
+                <div class="user-profile">
+                    <div class="user-avatar" id="header-user-avatar">د</div>
+                    <div class="user-details">
+                        <span class="user-name" id="header-user-name">د. علي محمد</span>
+                        <span class="user-role">طبيب أسنان رئيسي</span>
+                    </div>
+                </div>
+                <button id="logout-btn" class="btn-header-logout">
+                    <i class="fas fa-sign-out-alt"></i> خروج
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar Component -->
+    <div class="main-nav-wrapper">
+        <nav class="main-nav">
+            <ul class="nav-links">
+                <li class="nav-item"><a href="dashboard.html" class="active"><i class="fas fa-chart-pie"></i> الرئيسية (لوحة التحكم)</a></li>
+                <li class="nav-item"><a href="../patients/patients.html"><i class="fas fa-user-injured"></i> إدارة المرضى</a></li>
+                <li class="nav-item"><a href="../appointments/appointments.html"><i class="fas fa-calendar-check"></i> حجز المواعيد</a></li>
+                <li class="nav-item"><a href="../payments/payments.html"><i class="fas fa-wallet"></i> المدفوعات والمالية</a></li>
+                <li class="nav-item"><a href="../records/records.html"><i class="fas fa-folder-medical"></i> السجلات والتقارير</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="app-container">
+
+        <!-- Welcome & Clock Banner -->
+        <section class="welcome-banner">
+            <div class="welcome-text">
+                <h1>مرحباً بك في لوحة تحكم العيادة 👋</h1>
+                <p>متابعة فورية للمرضى، المواعيد اليومية، والإحصائيات المالية للعيادة.</p>
+            </div>
+            <div class="live-clock-card">
+                <i class="fas fa-clock"></i>
+                <div>
+                    <div style="font-size: 0.8rem; opacity: 0.9;">التوقيت المباشر</div>
+                    <div class="live-clock-time" id="current-time">--:--:--</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stat Cards -->
+        <section class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-icon-wrapper icon-teal">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-info">
+                    <div class="stat-number" id="stat-total-patients">0</div>
+                    <div class="stat-label">إجمالي المرضى المسجلين</div>
+                </div>
+            </div>
+
+            <div class="stat-box">
+                <div class="stat-icon-wrapper icon-blue">
+                    <i class="fas fa-calendar-day"></i>
+                </div>
+                <div class="stat-info">
+                    <div class="stat-number" id="stat-today-appointments">0</div>
+                    <div class="stat-label">مواعيد اليوم</div>
+                </div>
+            </div>
+
+            <div class="stat-box">
+                <div class="stat-icon-wrapper icon-green">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <div class="stat-info">
+                    <div class="stat-number" id="stat-total-income">0 ر.س</div>
+                    <div class="stat-label">إجمالي الإيرادات المحصلة</div>
+                </div>
+            </div>
+
+            <div class="stat-box">
+                <div class="stat-icon-wrapper icon-amber">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <div class="stat-info">
+                    <div class="stat-number" id="stat-total-debt">0 ر.س</div>
+                    <div class="stat-label">المستحقات المتبقية</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Grid -->
+        <section class="charts-grid">
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3 class="chart-title"><i class="fas fa-chart-line"></i> نمو تسجيل المرضى شهرياً</h3>
+                </div>
+                <div class="chart-container">
+                    <canvas id="patientsMonthlyChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3 class="chart-title"><i class="fas fa-chart-pie"></i> توزيع حالات المواعيد</h3>
+                </div>
+                <div class="chart-container">
+                    <canvas id="appointmentsStatusChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions & Today's Schedule -->
+        <section class="form-row" style="margin-bottom: 28px;">
+            <div class="form-card" style="margin-bottom: 0;">
+                <h3 class="page-title" style="font-size: 1.25rem; margin-bottom: 20px;">
+                    <i class="fas fa-bolt"></i> روابط سريعة
+                </h3>
+                <div class="quick-actions-grid">
+                    <a href="../patients/patients.html" class="action-card-btn">
+                        <i class="fas fa-user-plus"></i>
+                        <span>إضافة مريض جديد</span>
+                    </a>
+                    <a href="../appointments/appointments.html" class="action-card-btn">
+                        <i class="fas fa-calendar-plus"></i>
+                        <span>حجز موعد عيادة</span>
+                    </a>
+                    <a href="../payments/payments.html" class="action-card-btn">
+                        <i class="fas fa-receipt"></i>
+                        <span>كشف المدفوعات</span>
+                    </a>
+                    <button type="button" class="action-card-btn" id="export-backup-btn">
+                        <i class="fas fa-download"></i>
+                        <span>نسخ احتياطي (JSON)</span>
+                    </button>
+                    <button type="button" class="action-card-btn" id="import-backup-btn">
+                        <i class="fas fa-upload"></i>
+                        <span>استعادة نسخة</span>
+                    </button>
+                    <input type="file" id="import-backup-file" accept=".json" style="display: none;">
+                </div>
+            </div>
+
+            <div class="form-card" style="margin-bottom: 0;">
+                <h3 class="page-title" style="font-size: 1.25rem; margin-bottom: 20px;">
+                    <i class="fas fa-clock"></i> مواعيد اليوم
+                </h3>
+                <div id="today-appointments-container">
+                    <!-- Populated by dashboard.js -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <p>مشروع مقرر هندسة البرمجيات &copy; 2026 - نظام إدارة عيادة الأسنان الحديث</p>
+    </footer>
+
+    <!-- Dark Mode Toggle Floating Button -->
+    <div class="dark-mode-toggle">
+        <button class="dark-mode-btn" id="dark-mode-toggle" title="التبديل إلى الوضع الليلي">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <!-- Shared Scripts -->
+    <script src="../../shared/js/mock-data.js"></script>
+    <script src="../../shared/js/storage.js"></script>
+    <script src="../../shared/js/auth-guard.js"></script>
+    <script src="../../shared/js/common.js"></script>
+
+    <!-- Page-Specific Script -->
+    <script src="dashboard.js"></script>
+
+</body>
+</html>
