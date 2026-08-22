@@ -1,0 +1,68 @@
+/* ==========================================================================
+   Appointments Page Specific Styles
+   ========================================================================== */
+
+.financial-calculator-box {
+    background: var(--bg-body);
+    border: 1.5px dashed var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.financial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.calc-field label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.calc-field .form-control {
+    font-family: var(--font-number);
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.remaining-display {
+    background: var(--card-bg);
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.return-visit-box {
+    background: var(--bg-body);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin-top: 10px;
+    display: none;
+}
+
+.appointments-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.tab-btn {
+    padding: 8px 18px;
+    border-radius: var(--radius-md);
+    background: transparent;
+    border: none;
+    font-family: var(--font-main);
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.tab-btn.active {
+    background: var(--primary-color);
+    color: var(--text-white);
+}
