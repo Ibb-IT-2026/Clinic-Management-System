@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="حجز وجدولة المواعيد - عيادة الأسنان">
+    <title>حجز المواعيد - نظام إدارة عيادة الأسنان</title>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="../../shared/css/variables.css">
+    <link rel="stylesheet" href="../../shared/css/global.css">
+    <link rel="stylesheet" href="../../shared/css/responsive.css">
+
+    <!-- Page-Specific Style -->
+    <link rel="stylesheet" href="appointments.css">
+</head>
+<body>
+
+    <!-- Header Component -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="../dashboard/dashboard.html" class="brand-logo">
+                <i class="fas fa-tooth"></i>
+                <span>عيادة د. علي محمد لطب الأسنان</span>
+            </a>
+
+            <div class="header-actions">
+                <div class="user-profile">
+                    <div class="user-avatar" id="header-user-avatar">د</div>
+                    <div class="user-details">
+                        <span class="user-name" id="header-user-name">د. علي محمد</span>
+                        <span class="user-role">طبيب أسنان رئيسي</span>
+                    </div>
+                </div>
+                <button id="logout-btn" class="btn-header-logout">
+                    <i class="fas fa-sign-out-alt"></i> خروج
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar Component -->
+    <div class="main-nav-wrapper">
+        <nav class="main-nav">
+            <ul class="nav-links">
+                <li class="nav-item"><a href="../dashboard/dashboard.html"><i class="fas fa-chart-pie"></i> الرئيسية (لوحة التحكم)</a></li>
+                <li class="nav-item"><a href="../patients/patients.html"><i class="fas fa-user-injured"></i> إدارة المرضى</a></li>
+                <li class="nav-item"><a href="appointments.html" class="active"><i class="fas fa-calendar-check"></i> حجز المواعيد</a></li>
+                <li class="nav-item"><a href="../payments/payments.html"><i class="fas fa-wallet"></i> المدفوعات والمالية</a></li>
+                <li class="nav-item"><a href="../records/records.html"><i class="fas fa-folder-medical"></i> السجلات والتقارير</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="app-container">
+
+        <div class="page-header">
+            <h1 class="page-title">
+                <i class="fas fa-calendar-alt"></i> حجز وإدارة مواعيد العيادة
+            </h1>
+        </div>
+
+        <!-- Appointment Booking Form -->
+        <section class="form-card">
+            <h2 id="appointment-form-title" style="font-size: 1.3rem; margin-bottom: 20px; color: var(--primary-color);">
+                حجز موعد عيادة جديد
+            </h2>
+
+            <form id="appointment-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="appointment-patient-id">المريض <span class="required">*</span></label>
+                        <select id="appointment-patient-id" class="form-control" required>
+                            <option value="">-- جار تحميل قائمة المرضى --</option>
+                        </select>
+                        <small style="margin-top: 4px; display: block; color: var(--text-muted);">
+                            المريض غير مسجل؟ <a href="../patients/patients.html">انقر هنا لإضافته أولاً</a>
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="visit-type">نوع الإجراء الطبي <span class="required">*</span></label>
+                        <select id="visit-type" class="form-control" required>
+                            <option value="كشف وتشخيص">كشف وتشخيص أولي</option>
+                            <option value="تنظيف وتلميع">تنظيف وتلميع أسنان</option>
+                            <option value="حشو تجميلي">حشو تجميلي / ليزري</option>
+                            <option value="علاج عصب">سحب عصب وجذور</option>
+                            <option value="قلع جراحي">خلع سن / ضرس عقل</option>
+                            <option value="تركيبات وزراعة">تركيبات ثابتة / زراعة</option>
+                            <option value="تقويم أسنان">جلسة تقويم أسنان</option>
+                            <option value="متابعة واستشارة">متابعة واستشارة دورية</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="appointment-date">تاريخ الموعد <span class="required">*</span></label>
+                        <input type="date" id="appointment-date" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="appointment-time">وقت الموعد <span class="required">*</span></label>
+                        <input type="time" id="appointment-time" class="form-control" value="10:00" required>
+                    </div>
+                </div>
+
+                <!-- Financial Calculation Box -->
+                <div class="financial-calculator-box">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                        <label style="font-weight: 700; font-size: 1rem; color: var(--text-main);">
+                            <i class="fas fa-calculator"></i> الحسابات المالية للجلسة
+                        </label>
+                        <span id="calc-status-badge" class="badge badge-info">كشف جديد</span>
+                    </div>
+
+                    <div class="financial-grid">
+                        <div class="calc-field">
+                            <label for="total-amount">المبلغ الإجمالي (ريال) <span class="required">*</span></label>
+                            <input type="number" id="total-amount" class="form-control" placeholder="0" min="0" step="10" value="150" required>
+                        </div>
+
+                        <div class="calc-field">
+                            <label for="paid-amount">المدفوع الآن (ريال) <span class="required">*</span></label>
+                            <input type="number" id="paid-amount" class="form-control" placeholder="0" min="0" step="10" value="150" required>
+                        </div>
+
+                        <div class="calc-field">
+                            <label for="remaining-amount">المبلغ المتبقي (آلياً)</label>
+                            <input type="number" id="remaining-amount" class="form-control remaining-display" value="0" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Return Visit Toggle -->
+                <div class="form-group">
+                    <label>هل يحتاج المريض موعد مراجعة / جلسة قادمة؟</label>
+                    <div style="display: flex; gap: 20px; align-items: center;">
+                        <label class="radio-label">
+                            <input type="radio" name="return-visit" value="لا" id="return-no" checked>
+                            <span>لا</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="return-visit" value="نعم" id="return-yes">
+                            <span>نعم (تحديد موعد مراجعة)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Conditional: Return Visit Details -->
+                <div id="return-visit-details-box" class="return-visit-box">
+                    <div class="form-row" style="margin-bottom: 0;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="return-date">تاريخ المراجعة المقترح</label>
+                            <input type="date" id="return-date" class="form-control">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="return-type">الغرض من المراجعة</label>
+                            <input type="text" id="return-type" class="form-control" placeholder="مثال: فك غرز، إكمال الحشو، متابعة تقويم...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 16px;">
+                    <label for="appointment-notes">الملاحظات الطبية والإرشادات</label>
+                    <textarea id="appointment-notes" class="form-control" rows="2" placeholder="أي إرشادات أو وصفات مقدمة للمريض..."></textarea>
+                </div>
+
+                <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px;">
+                    <button type="button" class="btn btn-secondary" id="cancel-appointment-btn">
+                        <i class="fas fa-undo"></i> إعادة تعيين
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="save-appointment-btn">
+                        <i class="fas fa-check"></i> حفظ وتأكيد الموعد
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Search in Appointments -->
+        <div class="search-box">
+            <i class="fas fa-search" style="color: var(--text-muted);"></i>
+            <input type="text" id="appointment-search-input" class="form-control" placeholder="ابحث في جدول المواعيد باسم المريض أو الإجراء...">
+        </div>
+
+        <!-- Appointments List Table -->
+        <div class="table-card">
+            <div style="padding: 16px 20px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="font-size: 1.1rem;"><i class="fas fa-history"></i> جدول المواعيد والزيارات</h3>
+            </div>
+
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>رقم الموعد</th>
+                            <th>المريض</th>
+                            <th>نوع الإجراء</th>
+                            <th>التاريخ والوقت</th>
+                            <th>الإجمالي</th>
+                            <th>المدفوع</th>
+                            <th>حالة الدفع</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="appointments-table-body">
+                        <!-- Populated by appointments.js -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <p>مشروع مقرر هندسة البرمجيات &copy; 2026 - نظام إدارة عيادة الأسنان الحديث</p>
+    </footer>
+
+    <!-- Dark Mode Toggle Floating Button -->
+    <div class="dark-mode-toggle">
+        <button class="dark-mode-btn" id="dark-mode-toggle" title="التبديل إلى الوضع الليلي">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <!-- Shared Scripts -->
+    <script src="../../shared/js/mock-data.js"></script>
+    <script src="../../shared/js/storage.js"></script>
+    <script src="../../shared/js/auth-guard.js"></script>
+    <script src="../../shared/js/common.js"></script>
+
+    <!-- Page-Specific Script -->
+    <script src="appointments.js"></script>
+
+</body>
+</html>
