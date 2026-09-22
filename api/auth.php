@@ -1,50 +1,28 @@
 <?php
-// Output buffering to catch any accidental whitespace or error output
 ob_start();
-
 session_start();
 require_once 'db.php';
-
-// Clean buffer before sending headers if any output occurred
+require_once 'Services/AuthService.php';
 ob_clean();
 
 $method = $_SERVER['REQUEST_METHOD'];
+$authService = new AuthService($pdo);
 
 if ($method === 'POST') {
     $data = json_decode(file_get_contents("php://input"));
 
     if (isset($data->action) && $data->action === 'login') {
-        $username = $data->username;
-        $password = $data->password;
-
-        // Regenerate session ID to prevent fixation and ensure fresh start
         session_regenerate_id(true);
 
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
-        $stmt->execute([$username]);
-        $user = $stmt->fetch();
+        $user = $authService->login($data->username, $data->password);
 
-        // Check: 1. Hash match OR 2. Plain text match (for manually inserted passwords)
-        $is_valid = false;
         if ($user) {
-            if (password_verify($password, $user['password_hash'])) {
-                $is_valid = true;
-            } elseif ($user['password_hash'] === $password) { // Plain text check
-                $is_valid = true;
-            }
-        }
-
-        if ($is_valid) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
-
-            // Force write close to ensure session saved immediately
             session_write_close();
-
             echo json_encode(["status" => "success", "message" => "Login successful", "user" => $user]);
         } else {
-            // Fallback for initial setup (admin/admin) without DB user
-            if ($username === 'admin' && $password === 'admin') {
+            if ($data->username === 'admin' && $data->password === 'admin') {
                 $_SESSION['user_id'] = 1;
                 $_SESSION['username'] = 'admin';
                 session_write_close();
@@ -68,6 +46,5 @@ if ($method === 'POST') {
     }
 }
 
-// Flush buffer
 ob_end_flush();
 ?>
