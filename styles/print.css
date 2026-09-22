@@ -1,0 +1,90 @@
+/* Print Styles */
+@media print {
+
+    /* Hide UI Elements */
+    header,
+    nav,
+    .dark-mode-toggle,
+    .search-container,
+    #back-button-container,
+    .no-print,
+    #patients-records-list,
+    .financial-summary {
+        display: none !important;
+    }
+
+    /* Reset Layout */
+    body {
+        background-color: white !important;
+        color: black !important;
+        padding: 0;
+        margin: 0;
+    }
+
+    .container {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .main-content {
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        animation: none !important;
+    }
+
+    /* Ensure Details are Visible */
+    #patient-records-info,
+    #patient-visits {
+        display: block !important;
+        box-shadow: none !important;
+        border: none !important;
+        background: white !important;
+    }
+
+    #patient-records-info {
+        border-bottom: 2px solid #000 !important;
+        padding-bottom: 20px !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* Table Styling for Print */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th,
+    td {
+        border: 1px solid #000 !important;
+        padding: 8px;
+        text-align: right;
+        color: black !important;
+    }
+
+    th {
+        background-color: #f0f0f0 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Typography */
+    h2,
+    h3 {
+        color: black !important;
+    }
+
+    /* Add Header for Print */
+    .main-content::before {
+        content: "عيادة الأسنان - د. علي محمد - ملف مريض";
+        display: block;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #000;
+    }
+}

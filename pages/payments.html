@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المدفوعات - نظام إدارة عيادة الأسنان</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="../styles/variables.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <link rel="stylesheet" href="../styles/forms.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-tooth"></i>
+                <span>عيادة الأسنان - د. علي محمد</span>
+            </div>
+            <div class="user-info">
+                <div class="user-avatar">د.ع</div>
+                <div>
+                    <p>د. علي محمد</p>
+                    <p>طبيب أسنان</p>
+                </div>
+                <button id="logout-btn" class="btn" style="background-color: white; color: var(--primary-color);">
+                    <i class="fas fa-sign-out-alt"></i> خروج
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" style="margin-top: 20px;">
+        <nav>
+            <ul class="nav-links">
+                <li><a href="dashboard.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+                <li><a href="patients.html"><i class="fas fa-users"></i> المرضى</a></li>
+                <li><a href="appointments.html"><i class="fas fa-calendar-plus"></i> إضافة موعد</a></li>
+                <li><a href="payments.html" class="active"><i class="fas fa-money-bill-wave"></i> المدفوعات</a></li>
+                <li><a href="records.html"><i class="fas fa-file-medical"></i> سجلات المرضى</a></li>
+            </ul>
+        </nav>
+
+        <div class="main-content active">
+            <h2 class="section-title">المدفوعات</h2>
+
+            <div class="financial-summary"
+                style="background: linear-gradient(to left, var(--primary-color), var(--secondary-color)); color: white; padding: 20px; border-radius: var(--border-radius); margin-bottom: 25px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: center;">
+                <div class="financial-item">
+                    <h3 id="total-payments" style="font-size: 2rem; margin-bottom: 5px;">0</h3>
+                    <p style="opacity: 0.9;">إجمالي المدفوعات</p>
+                </div>
+                <div class="financial-item">
+                    <h3 id="completed-payments-count" style="font-size: 2rem; margin-bottom: 5px;">0</h3>
+                    <p style="opacity: 0.9;">مدفوعات مكتملة</p>
+                </div>
+                <div class="financial-item">
+                    <h3 id="not-paid-payments" style="font-size: 2rem; margin-bottom: 5px;">0</h3>
+                    <p style="opacity: 0.9;">لم يدفعوا</p>
+                </div>
+            </div>
+
+            <div class="search-container">
+                <input type="text" class="search-input" id="payment-search" placeholder="ابحث عن مريض...">
+                <button class="search-btn" id="search-payment-btn">
+                    <i class="fas fa-search"></i> بحث
+                </button>
+            </div>
+
+            <div class="table-container">
+                <table id="payments-table">
+                    <thead>
+                        <tr>
+                            <th>اسم المريض</th>
+                            <th>رقم الهاتف</th>
+                            <th>نوع الزيارة</th>
+                            <th>المبلغ الكلي</th>
+                            <th>المدفوع</th>
+                            <th>المتبقي</th>
+                            <th>الحالة</th>
+                            <th>التاريخ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="payments-table-body">
+                        <!-- Filled by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="dark-mode-toggle">
+        <button class="dark-mode-btn" id="dark-mode-toggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <script src="../js/api.js"></script>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/dark-mode.js"></script>
+    <script src="../js/payments.js"></script>
+    <script src="../js/app.js"></script>
+
+</body>
+
+</html>
