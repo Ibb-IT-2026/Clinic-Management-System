@@ -1,0 +1,321 @@
+/* تنسيقات الجداول */
+.table-container {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 30px;
+    overflow-x: auto;
+    transition: background-color 0.3s;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+body.dark-mode table {
+    color: #e0e0e0;
+}
+
+th,
+td {
+    padding: 18px 15px;
+    text-align: right;
+    border-bottom: 1px solid #eee;
+}
+
+body.dark-mode td {
+    border-color: #333;
+}
+
+th {
+    background-color: #f8f9fa;
+    font-weight: 700;
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+}
+
+body.dark-mode th {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+}
+
+tr:hover {
+    background-color: #f8f9fa;
+}
+
+body.dark-mode tr:hover {
+    background-color: #2d2d2d;
+}
+
+/* البطاقات */
+.stat-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+}
+
+.stat-content h3 {
+    font-size: 2.2rem;
+    margin-bottom: 5px;
+    color: var(--secondary-color);
+}
+
+body.dark-mode .stat-content h3 {
+    color: #e0e0e0;
+}
+
+.stat-content p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+body.dark-mode .stat-content p {
+    color: #aaa;
+}
+
+/* الأزرار */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.btn-view {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-edit {
+    background-color: var(--accent-color);
+    color: var(--dark-color);
+}
+
+.btn-delete {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.btn-restore {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.btn-add {
+    background-color: var(--success-color);
+    color: white;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+}
+
+.btn-cancel {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-back {
+    background-color: #6c757d;
+    color: white;
+    margin-bottom: 20px;
+}
+
+/* أزرار الإجراءات */
+.action-btn {
+    background-color: var(--card-bg);
+    border: none;
+    padding: 25px 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+}
+
+.action-btn i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+body.dark-mode .action-btn i {
+    color: #2a9d8f;
+}
+
+.action-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    background-color: var(--primary-color);
+    color: white;
+}
+
+body.dark-mode .action-btn:hover {
+    background-color: #2a9d8f;
+    color: white;
+    border-color: #2a9d8f;
+}
+
+.action-btn:hover i {
+    color: white;
+}
+
+body.dark-mode .action-btn:hover i {
+    color: white;
+}
+
+/* رسائل التنبيه */
+.alert {
+    padding: 15px 20px;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+body.dark-mode .alert {
+    background-color: #2d2d2d;
+    border-color: #444;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    color: #856404;
+}
+
+body.dark-mode .alert-warning {
+    background-color: #332b1a;
+    border-color: #665214;
+    color: #ffd54f;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+body.dark-mode .alert-danger {
+    background-color: #331a1a;
+    border-color: #661414;
+    color: #ff8a80;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+body.dark-mode .alert-success {
+    background-color: #1a3320;
+    border-color: #14582a;
+    color: #80ffa0;
+}
+
+/* حالات الدفع */
+.status-paid {
+    color: var(--success-color);
+    font-weight: 700;
+    background-color: #d4edda;
+    padding: 5px 15px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.status-unpaid {
+    color: var(--danger-color);
+    font-weight: 700;
+    background-color: #f8d7da;
+    padding: 5px 15px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.status-partial {
+    color: var(--warning-color);
+    font-weight: 700;
+    background-color: #fff3cd;
+    padding: 5px 15px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.status-not-paid {
+    color: #dc3545;
+    font-weight: 700;
+    background-color: #ffe6e6;
+    padding: 5px 15px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+/* زر الوضع الليلي */
+.dark-mode-toggle {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.dark-mode-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+}
+
+.dark-mode-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode-btn i {
+    font-size: 1.5rem;
+}
+
+body.dark-mode .dark-mode-btn {
+    background-color: #e9c46a;
+    color: #264653;
+}
