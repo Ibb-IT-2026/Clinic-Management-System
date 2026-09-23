@@ -1,0 +1,115 @@
+@import url('variables.css');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: var(--dark-color);
+    line-height: 1.6;
+    direction: rtl;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* أنماط الوضع الليلي - الأساسيات */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+    --card-bg: #1e1e1e;
+    /* Darker card background */
+    --text-color: #e0e0e0;
+    --heading-color: #f8f9fa;
+    --light-color: #2d2d2d;
+    --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.section-title {
+    margin: 30px 0 20px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid var(--primary-color);
+    color: var(--secondary-color);
+    font-size: 1.5rem;
+}
+
+body.dark-mode .section-title {
+    color: #e0e0e0;
+}
+
+/* تنسيقات الأقسام المخفية */
+.hidden-section {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius);
+    border: 2px dashed #dee2e6;
+    margin-top: 20px;
+    display: none;
+}
+
+body.dark-mode .hidden-section {
+    background-color: #2d2d2d;
+    border-color: #444;
+}
+
+.hidden-section.active {
+    display: block;
+    animation: slideDown 0.5s;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.main-content {
+    /*display: none;*/
+    /* سيتم التعامل مع هذا عبر الصفحات المنفصلة */
+    animation: fadeIn 0.5s;
+}
+
+/* Toast Animations */
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
